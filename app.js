@@ -61,11 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // Shuffle Array Function (Fisher-Yates)
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
     // Quiz State
     let quizState = {
         questions: [], currentIndex: 0, score: 0, answers: [],
         settings: { difficulty: 'all', category: 'all', timer: 0, shuffle: true },
-        timerInterval: null, startTime: null
+        timerInterval: null, startTime: null,
+        shuffledAnswers: [] // Stores shuffled answer indices for each question
     };
 
     // Elements
@@ -122,6 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
         quizState.answers = new Array(quizState.questions.length).fill(null);
         quizState.startTime = Date.now();
 
+        // Create shuffled answer indices for each question
+        quizState.shuffledAnswers = quizState.questions.map(q => {
+            const indices = q.answers.map((_, i) => i);
+            return shuffleArray(indices);
+        });
+
         quizOptions.style.display = 'none';
         quizContainer.style.display = 'block';
         quizResults.style.display = 'none';
@@ -142,14 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.getElementById('answersGrid');
         const userAnswer = quizState.answers[quizState.currentIndex];
 
-        grid.innerHTML = q.answers.map((ans, i) => {
+        // Get shuffled answer indices for this question
+        const shuffledIndices = quizState.shuffledAnswers[quizState.currentIndex];
+
+        grid.innerHTML = shuffledIndices.map((originalIndex, displayPosition) => {
+            const ans = q.answers[originalIndex];
             let classes = 'answer-btn';
             if (userAnswer !== null) {
                 classes += ' disabled';
-                if (i === q.correct) classes += ' correct';
-                else if (i === userAnswer && userAnswer !== q.correct) classes += ' wrong';
+                if (originalIndex === q.correct) classes += ' correct';
+                else if (originalIndex === userAnswer && userAnswer !== q.correct) classes += ' wrong';
             }
-            return `<button class="${classes}" data-index="${i}">${ans}</button>`;
+            return `<button class="${classes}" data-index="${originalIndex}">${ans}</button>`;
         }).join('');
 
         // Feedback
