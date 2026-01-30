@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teste dein Wissen über Lost Places und Urban Exploring!">
+    <title>Lost Places Quiz | Urban Exploring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-animation"><div class="bg-gradient"></div></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo"><span class="logo-icon">🏚️</span><span>Lost Places Quiz</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Start</a></li>
+                <li><a href="#quiz" class="nav-link">Quiz</a></li>
+                <li><a href="#rules" class="nav-link">Regeln</a></li>
+                <li><a href="#about" class="nav-link">Über</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">🔦 Urban Exploring</span>
+            <h1 class="hero-title">Teste dein <span class="gradient-text">Lost Places</span> Wissen</h1>
+            <p class="hero-subtitle">Bist du bereit, dein Wissen über verlassene Orte auf die Probe zu stellen?</p>
+            <div class="hero-buttons">
+                <a href="#quiz" class="btn btn-primary"><span>Quiz starten</span></a>
+                <a href="#rules" class="btn btn-secondary">Regeln lesen</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-number">25+</span><span class="stat-label">Fragen</span></div>
+                <div class="stat"><span class="stat-number">5</span><span class="stat-label">Kategorien</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">📝 Quiz</span>
+                <h2 class="section-title">Lost Places Quiz</h2>
+            </div>
+            <div class="quiz-options" id="quizOptions">
+                <h3>Quiz-Einstellungen</h3>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <label>Schwierigkeit</label>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-difficulty="all">Alle</button>
+                            <button class="option-btn" data-difficulty="easy">Leicht</button>
+                            <button class="option-btn" data-difficulty="hard">Schwer</button>
+                        </div>
+                    </div>
+                    <div class="option-card">
+                        <label>Timer</label>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-timer="0">Aus</button>
+                            <button class="option-btn" data-timer="30">30s</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-large" id="startQuizBtn">Quiz starten</button>
+            </div>
+            <div class="quiz-container" id="quizContainer" style="display:none;">
+                <div class="quiz-header">
+                    <div class="quiz-progress"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><span id="progressText">1/25</span></div>
+                    <div class="quiz-timer" id="quizTimer" style="display:none;"><span id="timerDisplay">30</span>s</div>
+                    <div class="quiz-score">Punkte: <span id="scoreValue">0</span></div>
+                </div>
+                <div class="quiz-body">
+                    <div class="question-card"><span class="question-category" id="questionCategory"></span><h3 id="questionText"></h3><div class="answers-grid" id="answersGrid"></div></div>
+                    <div class="quiz-feedback" id="quizFeedback" style="display:none;"><div id="feedbackIcon"></div><p id="feedbackText"></p><p id="feedbackExplanation"></p></div>
+                </div>
+                <div class="quiz-footer"><button class="btn btn-secondary" id="prevBtn" disabled>Zurück</button><button class="btn btn-primary" id="nextBtn">Weiter</button></div>
+            </div>
+            <div class="quiz-results" id="quizResults" style="display:none;">
+                <div class="results-card">
+                    <div id="resultsIcon">🏆</div>
+                    <h3 id="resultsTitle">Fertig!</h3>
+                    <div class="results-score"><span id="finalScore">0</span>/<span id="maxScore">25</span></div>
+                    <p id="resultsPercentage"></p>
+                    <p id="resultsMessage"></p>
+                    <button class="btn btn-primary" id="restartQuizBtn">Nochmal</button>
+                    <button class="btn btn-secondary" id="newQuizBtn">Neue Einstellungen</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rules" class="rules-section">
+        <div class="container">
+            <div class="section-header"><span class="section-badge">⚠️ Wichtig</span><h2 class="section-title">Regeln für Urban Exploring</h2></div>
+            <div class="rules-grid" id="rulesGrid"></div>
+            <div class="rules-warning"><div class="warning-icon">⚖️</div><div class="warning-content"><h4>Rechtlicher Hinweis</h4><p>Urban Exploring kann rechtliche Konsequenzen haben. Hausfriedensbruch ist strafbar!</p></div></div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-badge">👤 Über mich</span>
+                    <h2 class="section-title">Erstellt von sim0n.urbex</h2>
+                    <p>Hey! Ich bin Simon und leidenschaftlicher Urban Explorer. Diese Website habe ich erstellt, um mein Wissen mit der Community zu teilen.</p>
+                    <a href="https://www.tiktok.com/@sim0n.urbex" target="_blank" class="social-link tiktok">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                        <span>@sim0n.urbex auf TikTok folgen</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Lost Places Quiz - Erstellt von <a href="https://www.tiktok.com/@sim0n.urbex" target="_blank">sim0n.urbex</a></p>
+        </div>
+    </footer>
+
+    <script src="quiz.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
