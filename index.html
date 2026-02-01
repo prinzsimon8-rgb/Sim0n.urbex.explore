@@ -23,6 +23,7 @@
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">Start</a></li>
                 <li><a href="#quiz" class="nav-link">Quiz</a></li>
+                <li><a href="#stats" class="nav-link">Statistiken</a></li>
                 <li><a href="#gallery" class="nav-link">Galerie</a></li>
                 <li><a href="#rules" class="nav-link">Regeln</a></li>
                 <li><a href="#about" class="nav-link">Über</a></li>
@@ -141,20 +142,63 @@
         </div>
     </section>
 
+    <!-- Statistiken Sektion -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">📊 Statistiken</span>
+                <h2 class="section-title">Meine <span class="gradient-text">Urbex-Reise</span></h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏚️</div>
+                    <div class="stat-number" data-count="5">0</div>
+                    <div class="stat-label">Erkundete Orte</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="stat-label">Bundesländer</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📸</div>
+                    <div class="stat-number" data-count="150">0</div>
+                    <div class="stat-label">Fotos aufgenommen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-number" data-count="48">0</div>
+                    <div class="stat-label">Stunden erkundet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="gallery" class="gallery-section">
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">📸 Galerie</span>
                 <h2 class="section-title">Meine <span class="gradient-text">Erkundungen</span></h2>
             </div>
+
+            <!-- Galerie Filter -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">Alle</button>
+                <button class="filter-btn" data-filter="klinik">🏥 Kliniken</button>
+                <button class="filter-btn" data-filter="industrie">🏭 Industrie</button>
+                <button class="filter-btn" data-filter="wohnen">🏚️ Wohngebäude</button>
+                <button class="filter-btn" data-filter="handel">🛋️ Handel</button>
+            </div>
+
             <div class="gallery-grid">
-                <article class="gallery-card featured">
-                    <div class="gallery-image">
+                <article class="gallery-card featured" data-category="klinik">
+                    <div class="gallery-image" onclick="openLightbox(this)">
                         <img src="titel-bad-rippoldsau-schwarzwaldklinik.webp"
                             alt="Verlassene Rehaklinik im Schwarzwald" loading="lazy">
                         <div class="gallery-overlay">
                             <span class="gallery-tag">🏥 Verlassene Klinik</span>
                         </div>
+                        <div class="image-zoom-hint">🔍 Klicken zum Vergrößern</div>
                     </div>
                     <div class="gallery-content">
                         <h3>Die vergessene Rehaklinik im Schwarzwald</h3>
@@ -188,12 +232,13 @@
                     </div>
                 </article>
 
-                <article class="gallery-card featured">
-                    <div class="gallery-image">
+                <article class="gallery-card featured" data-category="industrie">
+                    <div class="gallery-image" onclick="openLightbox(this)">
                         <img src="1996ca_Ziegelei_vO_DZ_AB_H9.jpg" alt="Verlassene Ziegelei" loading="lazy">
                         <div class="gallery-overlay">
                             <span class="gallery-tag">🏭 Verlassene Ziegelei</span>
                         </div>
+                        <div class="image-zoom-hint">🔍 Klicken zum Vergrößern</div>
                     </div>
                     <div class="gallery-content">
                         <h3>Die stillgelegte Ziegelei</h3>
@@ -223,12 +268,13 @@
                     </div>
                 </article>
 
-                <article class="gallery-card featured">
-                    <div class="gallery-image">
+                <article class="gallery-card featured" data-category="handel">
+                    <div class="gallery-image" onclick="openLightbox(this)">
                         <img src="54805498_f91fda8dfd.jpg" alt="Verlassenes Möbelhaus" loading="lazy">
                         <div class="gallery-overlay">
                             <span class="gallery-tag">🛋️ Verlassenes Möbelhaus</span>
                         </div>
+                        <div class="image-zoom-hint">🔍 Klicken zum Vergrößern</div>
                     </div>
                     <div class="gallery-content">
                         <h3>Das vergessene Möbelhaus</h3>
@@ -258,12 +304,13 @@
                     </div>
                 </article>
 
-                <article class="gallery-card featured">
-                    <div class="gallery-image">
+                <article class="gallery-card featured" data-category="wohnen">
+                    <div class="gallery-image" onclick="openLightbox(this)">
                         <img src="44173.jpg" alt="Verlassenes Altenheim" loading="lazy">
                         <div class="gallery-overlay">
                             <span class="gallery-tag">🏚️ Verlassenes Altenheim</span>
                         </div>
+                        <div class="image-zoom-hint">🔍 Klicken zum Vergrößern</div>
                     </div>
                     <div class="gallery-content">
                         <h3>Das vergessene Altenheim</h3>
@@ -295,9 +342,56 @@
                         </div>
                     </div>
                 </article>
+
+                <!-- NEUE ERKUNDUNG: Verlassene Gärtnerei -->
+                <article class="gallery-card featured" data-category="industrie">
+                    <div class="gallery-image" onclick="openLightbox(this)">
+                        <img src="abc.jpg" alt="Verlassene Gärtnerei" loading="lazy">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">🌿 Verlassene Gärtnerei</span>
+                        </div>
+                        <div class="image-zoom-hint">🔍 Klicken zum Vergrößern</div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Die vergessene Gärtnerei am Fuße der Alb</h3>
+                        <p class="gallery-description">
+                            Am Rande einer kleinen Stadt in Baden-Württemberg erstreckt sich dieses verlassene
+                            Gärtnereigelände – einst ein blühender Betrieb, der die Region mit frischen Pflanzen
+                            und Blumen versorgte. Heute stehen die charakteristischen Gewächshäuser leer, ihre
+                            gläsernen Dächer teils zerbrochen, während die Natur langsam ihr eigenes Grün
+                            zwischen den verlassenen Strukturen entfaltet.
+                        </p>
+                        <p class="gallery-description">
+                            Der hohe Backsteinschornstein ragt noch immer in den Himmel – ein Zeugnis der Zeit,
+                            als hier Heizungsanlagen die Gewächshäuser auch im Winter wärmten. Daneben steht
+                            das alte Wirtschaftsgebäude, dessen gelbe Fassade von Graffiti und den Spuren der
+                            Zeit gezeichnet ist. Die rostigen Metallgerüste der Gewächshäuser erinnern an die
+                            einst prächtigen Glaspaläste, in denen Tausende von Setzlingen und Blumen gezogen wurden.
+                        </p>
+                        <p class="gallery-description">
+                            Besonders faszinierend ist der Kontrast zwischen der industriellen Vergangenheit und
+                            der wilden Vegetation, die sich nun ihren Weg bahnt. Büsche und Wildkräuter haben
+                            die Beete überwuchert, während das Weiß der zurückgelassenen Folien und Planen
+                            gespenstisch im Wind flattert. Ein Ort, an dem einst Leben kultiviert wurde,
+                            und der nun selbst der Natur überlassen ist – ein Lost Place voller melancholischer
+                            Schönheit und stiller Vergänglichkeit.
+                        </p>
+                        <div class="gallery-meta">
+                            <span class="meta-item">🗓️ Erkundet 2025</span>
+                            <span class="meta-item">📍 Baden-Württemberg, Deutschland</span>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="">
+        <div id="lightbox-caption"></div>
+    </div>
 
     <section id="rules" class="rules-section">
         <div class="container">

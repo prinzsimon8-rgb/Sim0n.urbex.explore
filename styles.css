@@ -1343,3 +1343,326 @@ body {
     background: rgba(201, 168, 108, 0.3);
     color: var(--text-bright);
 }
+
+/* ============================================
+   STATISTICS SECTION
+   ============================================ */
+.stats-section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 168, 108, 0.2), transparent);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(201, 168, 108, 0.08);
+    border-radius: 20px;
+    padding: 40px 25px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(201, 168, 108, 0.25);
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(201, 168, 108, 0.08);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.stat-card:nth-child(2) .stat-icon {
+    animation-delay: 0.3s;
+}
+
+.stat-card:nth-child(3) .stat-icon {
+    animation-delay: 0.6s;
+}
+
+.stat-card:nth-child(4) .stat-icon {
+    animation-delay: 0.9s;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   GALLERY FILTERS
+   ============================================ */
+.gallery-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid rgba(201, 168, 108, 0.2);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary);
+    background: rgba(201, 168, 108, 0.1);
+}
+
+.filter-btn.active {
+    background: var(--gradient);
+    border-color: transparent;
+    color: var(--bg-dark);
+    font-weight: 600;
+}
+
+/* Gallery Card Hide Animation */
+.gallery-card.hidden {
+    display: none;
+}
+
+.gallery-card {
+    animation: fadeInCard 0.5s ease forwards;
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   IMAGE ZOOM HINT
+   ============================================ */
+.image-zoom-hint {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: rgba(10, 10, 15, 0.85);
+    border: 1px solid rgba(201, 168, 108, 0.3);
+    border-radius: 25px;
+    color: var(--primary);
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.gallery-image:hover .image-zoom-hint {
+    opacity: 1;
+}
+
+.gallery-image {
+    cursor: pointer;
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding: 40px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(5, 5, 8, 0.95);
+    backdrop-filter: blur(20px);
+    animation: fadeInLightbox 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@keyframes fadeInLightbox {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: var(--primary);
+    font-size: 50px;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 10000;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    color: var(--text-bright);
+    transform: rotate(90deg);
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#lightbox-caption {
+    margin-top: 20px;
+    color: var(--text);
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 800px;
+}
+
+/* ============================================
+   RESPONSIVE UPDATES
+   ============================================ */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 30px 20px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .gallery-filters {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+
+    .lightbox {
+        padding: 20px;
+    }
+
+    .lightbox-close {
+        top: 15px;
+        right: 20px;
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-icon {
+        font-size: 2.2rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+}

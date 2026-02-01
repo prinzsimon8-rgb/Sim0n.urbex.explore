@@ -1,3 +1,29 @@
+// Lightbox Functions (Global)
+function openLightbox(element) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    const img = element.querySelector('img');
+    lightboxImg.src = img.src;
+    lightboxCaption.textContent = img.alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+
 // App Logic
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu
@@ -33,6 +59,76 @@ document.addEventListener('DOMContentLoaded', () => {
             if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
         });
     });
+
+    // ============================================
+    // GALLERY FILTER FUNCTIONALITY
+    // ============================================
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryCards = document.querySelectorAll('.gallery-card');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+
+            galleryCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.classList.remove('hidden');
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = 'fadeInCard 0.5s ease forwards';
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // ============================================
+    // ANIMATED STATISTICS COUNTER
+    // ============================================
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let statsAnimated = false;
+
+    function animateStats() {
+        if (statsAnimated) return;
+
+        const statsSection = document.getElementById('stats');
+        if (!statsSection) return;
+
+        const rect = statsSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+        if (isVisible) {
+            statsAnimated = true;
+
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.dataset.count);
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+    }
+
+    window.addEventListener('scroll', animateStats);
+    animateStats(); // Check on load
 
     // Rules Data
     const rules = [
@@ -278,3 +374,4 @@ document.addEventListener('DOMContentLoaded', () => {
         quizOptions.style.display = 'block';
     });
 });
+
