@@ -1364,16 +1364,18 @@ body {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .stat-card {
     background: var(--bg-card);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(201, 168, 108, 0.08);
-    border-radius: 20px;
-    padding: 40px 25px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 168, 108, 0.12);
+    border-radius: 24px;
+    padding: 50px 30px;
     text-align: center;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
@@ -1393,22 +1395,38 @@ body {
     transition: transform 0.5s ease;
 }
 
+.stat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(201, 168, 108, 0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
 .stat-card:hover::before {
     transform: scaleX(1);
 }
 
+.stat-card:hover::after {
+    opacity: 1;
+}
+
 .stat-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(201, 168, 108, 0.25);
+    transform: translateY(-12px) scale(1.02);
+    border-color: rgba(201, 168, 108, 0.3);
     box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(201, 168, 108, 0.08);
+        0 30px 70px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(201, 168, 108, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .stat-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 3.5rem;
+    margin-bottom: 22px;
     animation: gentleFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(201, 168, 108, 0.3));
 }
 
 .stat-card:nth-child(2) .stat-icon {
@@ -1419,25 +1437,24 @@ body {
     animation-delay: 0.6s;
 }
 
-.stat-card:nth-child(4) .stat-icon {
-    animation-delay: 0.9s;
-}
-
 .stat-number {
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 40px rgba(201, 168, 108, 0.3);
+    letter-spacing: -1px;
 }
 
 .stat-label {
     color: var(--text-muted);
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-weight: 500;
 }
 
 /* ============================================
@@ -1609,24 +1626,34 @@ body {
 /* ============================================
    RESPONSIVE UPDATES
    ============================================ */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 35px 20px;
+    }
+
+    .stat-number {
+        font-size: 2.8rem;
     }
 }
 
 @media (max-width: 768px) {
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        gap: 20px;
     }
 
     .stat-card {
-        padding: 30px 20px;
+        padding: 40px 30px;
     }
 
     .stat-number {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .gallery-filters {
@@ -1651,18 +1678,19 @@ body {
 
 @media (max-width: 600px) {
     .stats-grid {
-        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
     }
 
     .stat-icon {
-        font-size: 2.2rem;
+        font-size: 2.8rem;
     }
 
     .stat-number {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .stat-label {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
     }
 }

@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             statNumbers.forEach(stat => {
                 const target = parseInt(stat.dataset.count);
+                const suffix = stat.dataset.suffix || '';
                 const duration = 2000; // 2 seconds
                 const increment = target / (duration / 16);
                 let current = 0;
@@ -115,10 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const updateCounter = () => {
                     current += increment;
                     if (current < target) {
-                        stat.textContent = Math.floor(current);
+                        stat.textContent = Math.floor(current) + suffix;
                         requestAnimationFrame(updateCounter);
                     } else {
-                        stat.textContent = target;
+                        stat.textContent = target + suffix;
                     }
                 };
 
