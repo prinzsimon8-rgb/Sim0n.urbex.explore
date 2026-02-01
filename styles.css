@@ -1345,6 +1345,251 @@ body {
 }
 
 /* ============================================
+   TIPS SECTION - Anfänger Guide
+   ============================================ */
+.tips-section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.tips-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 168, 108, 0.2), transparent);
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    margin-top: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tips Category */
+.tips-category {
+    margin-bottom: 60px;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--text-bright);
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(201, 168, 108, 0.15);
+}
+
+.category-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 8px rgba(201, 168, 108, 0.3));
+}
+
+/* Tips Grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Tip Card */
+.tip-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    padding: 30px;
+    border: 1px solid rgba(201, 168, 108, 0.08);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.tip-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+}
+
+.tip-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(201, 168, 108, 0.06) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.tip-card:hover::before {
+    transform: scaleY(1);
+}
+
+.tip-card:hover::after {
+    opacity: 1;
+}
+
+.tip-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(201, 168, 108, 0.2);
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(201, 168, 108, 0.06);
+}
+
+.tip-number {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.12;
+    transition: opacity 0.3s ease;
+}
+
+.tip-card:hover .tip-number {
+    opacity: 0.25;
+}
+
+.tip-icon {
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+    display: inline-block;
+    animation: gentleFloat 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.tip-card:nth-child(2) .tip-icon {
+    animation-delay: 0.2s;
+}
+
+.tip-card:nth-child(3) .tip-icon {
+    animation-delay: 0.4s;
+}
+
+.tip-card:nth-child(4) .tip-icon {
+    animation-delay: 0.6s;
+}
+
+.tip-card:nth-child(5) .tip-icon {
+    animation-delay: 0.8s;
+}
+
+.tip-card:nth-child(6) .tip-icon {
+    animation-delay: 1s;
+}
+
+.tip-card h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-bright);
+    position: relative;
+    z-index: 1;
+}
+
+.tip-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tips Warning Box */
+.tips-warning {
+    display: flex;
+    gap: 25px;
+    background: linear-gradient(135deg, rgba(201, 168, 108, 0.1) 0%, rgba(201, 168, 108, 0.05) 100%);
+    border: 1px solid rgba(201, 168, 108, 0.3);
+    border-radius: 20px;
+    padding: 35px;
+    align-items: flex-start;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tips-warning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient);
+}
+
+.tips-warning .warning-icon {
+    font-size: 2.8rem;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.tips-warning .warning-content h4 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.tips-warning .warning-content p {
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.tips-warning .warning-content strong {
+    color: var(--primary);
+}
+
+/* Responsive Tips */
+@media (max-width: 768px) {
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-title {
+        font-size: 1.3rem;
+    }
+
+    .tips-warning {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+/* ============================================
    STATISTICS SECTION
    ============================================ */
 .stats-section {
